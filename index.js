@@ -10,9 +10,9 @@ app.use(
   })
 )
 
-app.use("/", require("./apis"))
-
-app.listen(PORT, function(err){
-	if (err) console.log(err)
-		console.log(`Server has started on the port ${PORT}.`)
+app.get("/", (req, res) => {
+  res.send("Welcome to Node MySQL CRUD api server!")
 })
+
+app.use("/", require("./apis"))
+app.listen(PORT)
