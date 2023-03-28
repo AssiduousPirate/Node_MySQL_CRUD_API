@@ -4,17 +4,11 @@ const fs = require('fs')
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        const uploadDir = path.join(__dirname, '..', 'images')
-        fs.mkdir(uploadDir, { recursive: true }, function (err) {
-            if (err) {
-                console.log(err)
-            } else {
-                cb(null, uploadDir)
-            }
-        })
+        cb(null, "./images/")
     },
     filename: (req, file, cb) => {
-        cb(null, file.fieldname + "-" + Date.now() + "." + "png")
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+        cb(null, file.fieldname + '-' + uniqueSuffix + "." + "jpeg")
     }
 })
 const upload = multer({ storage: storage })

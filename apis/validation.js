@@ -15,6 +15,7 @@ const post = Joi.object().keys({
 })
 
 const update = Joi.object().keys({
+	id: Joi.number(),
 	name: Joi.string(),
 	title: Joi.string(),
 	description: Joi.string(),
