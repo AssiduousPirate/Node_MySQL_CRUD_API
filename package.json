@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AssiduousPirate/Node_MySQL_CRUD_API.git"
+    "url": "git+https://github.com/saram-aman/Node_MySQL_CRUD_API.git"
   },
   "author": "saram aman chaudhary",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AssiduousPirate/Node_MySQL_CRUD_API/issues"
+    "url": "https://github.com/saram-aman/Node_MySQL_CRUD_API/issues"
   },
-  "homepage": "https://github.com/AssiduousPirate/Node_MySQL_CRUD_API#readme",
+  "homepage": "https://github.com/saram-aman/Node_MySQL_CRUD_API#readme",
   "dependencies": {
     "express": "^4.18.2",
     "i": "^0.3.7",
