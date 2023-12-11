@@ -18,7 +18,6 @@ class ApiController {
             let data = await readPool.query("SELECT * FROM `posts` WHERE `id` = ?",[id])
             data = data[0]
             if (!data) return res.status(200).json("There are no post exists with id: " + id)
-
             return res.status(200).json(data)
         } catch (err) {
             return res.status(500).json("An error occurred!" + err)
@@ -34,9 +33,7 @@ class ApiController {
                     [name, title, description, image, city, category, status, author]
                 ]
             ])
-
             if(!index) return res.status(500).json("An error occurred!")
-
             let post = await readPool.query("SELECT * FROM `posts` WHERE `id` = ?", [index.insertId])
             post = post[0]
             return res.status(200).json(post)
@@ -53,15 +50,10 @@ class ApiController {
             let postExists = await readPool.query("SELECT * FROM `posts` WHERE `id` = ? AND `status` = ?", [id, 'active'])
             postExists = postExists[0]
             if(!postExists) return res.status(500).json("Post doesn't exists!")
-
             const imagePath = path.join(__dirname, "..", "images", postExists.image)
-
             fs.unlink(imagePath, function(e) {
-                if (e) {
-                    return res.status(500).json("An error occurred!" + e)
-                }
+                if (e) return res.status(500).json("An error occurred!" + e)
             })
-
             await writePool.query("UPDATE `posts` SET `name` = ?, `title` = ?, `description` = ?, `image` = ?, `city` = ?, `category` = ?, `status` = ?, `author` = ? WHERE `id` = ?", 
                 [
                     name === "" ? postExists.name : name,
@@ -87,18 +79,13 @@ class ApiController {
             let postExists = await readPool.query("SELECT `name`, `image` FROM `posts` WHERE `id` = ?", [id])
             postExists = postExists[0]
             if(!postExists) return res.status(500).json("Post dosn't exists!")
-
             const imagePath = path.join(__dirname, "..", "images", postExists.image)
-
             if (imagePath) {
                 fs.unlink(imagePath, function(e) {
-                    if (e) {
-                        return res.status(500).json("An error occurred!" + e)
-                    }
+                    if (e) return res.status(500).json("An error occurred!" + e)
                 })
             }
             await writePool.query("DELETE FROM `posts` WHERE `id` = ?", [id])
-
             return res.status(200).json("Post deleted successfully!")
         } catch (err) {
             return res.status(500).json("An error occurred!" + err)
